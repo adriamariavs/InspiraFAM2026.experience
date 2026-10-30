@@ -1,0 +1,3 @@
+Projeto recuperado com os arquivos originais enviados. Fotos dos artistas em ativos/brand/artistas; mapa oficial em ativos/brand/mapa. Quatro patrocinadores nos arquivos recebidos (Dókimos, APR3D, Foto Príncipe e Shadow); Art Up é apoiador. Nenhum quinto patrocinador foi inventado. Abra via Live Server/HTTP para activities.json funcionar.
+Referências locais ausentes: []
+Ajustes desta versão: O EVENTO no painel; stickers nos cards e modais das atividades; removidas molduras extras no primeiro e último patrocinador.
