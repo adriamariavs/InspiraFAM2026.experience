@@ -108,3 +108,26 @@ $('[data-full-next]')?.addEventListener('click',()=>displayAboutPhoto(aboutPhoto
 aboutLightbox?.addEventListener('click',e=>{if(e.target===aboutLightbox)aboutLightbox.close()});
 aboutLightbox?.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();displayAboutPhoto(aboutPhotoIndex+(e.key==='ArrowLeft'?-1:1))}});
 
+
+/* Carrossel de artistas: loop infinito com cópias acessíveis ocultas */
+(()=>{
+ const rail=document.querySelector('.artists-track');
+ if(!rail || rail.dataset.infiniteReady)return;
+ const originals=Array.from(rail.children);
+ if(!originals.length)return;
+ rail.dataset.infiniteReady='true';
+ const cloneGroup=()=>originals.map(el=>{const copy=el.cloneNode(true);copy.setAttribute('aria-hidden','true');copy.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));return copy});
+ rail.prepend(...cloneGroup());rail.append(...cloneGroup());
+ let segment=0, adjusting=false;
+ const recalc=()=>{segment=originals[0].offsetLeft-rail.firstElementChild.offsetLeft;if(segment<=0){const first=originals[0], last=originals[originals.length-1];segment=last.offsetLeft+last.offsetWidth-first.offsetLeft+parseFloat(getComputedStyle(rail).columnGap||0)}};
+ const start=()=>{recalc();rail.scrollLeft=segment};
+ requestAnimationFrame(()=>requestAnimationFrame(start));
+ rail.addEventListener('scroll',()=>{
+  if(adjusting||!segment)return;
+  if(rail.scrollLeft<segment*.5){adjusting=true;rail.scrollLeft+=segment;adjusting=false}
+  else if(rail.scrollLeft>segment*1.5){adjusting=true;rail.scrollLeft-=segment;adjusting=false}
+ },{passive:true});
+ window.addEventListener('resize',()=>{const ratio=segment?rail.scrollLeft/segment:1;recalc();rail.scrollLeft=segment*ratio});
+ document.querySelector('.gallery-prev')?.addEventListener('click',e=>{e.stopImmediatePropagation();const width=originals[0].getBoundingClientRect().width+24;rail.scrollBy({left:-width,behavior:'smooth'})},true);
+ document.querySelector('.gallery-next')?.addEventListener('click',e=>{e.stopImmediatePropagation();const width=originals[0].getBoundingClientRect().width+24;rail.scrollBy({left:width,behavior:'smooth'})},true);
+})();
