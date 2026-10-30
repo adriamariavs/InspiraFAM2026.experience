@@ -1,0 +1,5 @@
+INSPIRA FAM EXPERIENCE 2026
+Patrocinadores: 5 imagens padronizadas em 1200x1200, sem corte dos logotipos.
+Inscrições: link público do Sympla configurado em activities.json e na página de inscrições.
+Link: https://www.sympla.com.br/evento/inspira-fam---experience/3603612
+Para visualizar localmente, abra o projeto no VS Code com Live Server.

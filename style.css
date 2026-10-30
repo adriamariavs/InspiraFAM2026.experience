@@ -2234,3 +2234,19 @@ p,small,strong,label,h1,h2,h3{overflow-wrap:break-word}
 .partner-card .partner-logo-image img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
 @media(max-width:1100px){.partner-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:650px){.partner-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* Patrocinadores: todos os cinco arquivos são quadrados e têm o mesmo enquadramento. */
+.partner-card .partner-logo-image,
+.partner-card:first-child .partner-logo-image,
+.partner-card:last-child .partner-logo-image {
+  width:100%!important; height:auto!important; aspect-ratio:1/1!important;
+  padding:0!important; border:0!important; background:transparent!important;
+  overflow:hidden!important; border-radius:20px!important;
+}
+.partner-card .partner-logo-image img,
+.partner-card:first-child .partner-logo-image img,
+.partner-card:last-child .partner-logo-image img {
+  display:block!important; width:100%!important; height:100%!important;
+  max-width:100%!important; max-height:100%!important;
+  object-fit:cover!important; object-position:center!important;
+}
